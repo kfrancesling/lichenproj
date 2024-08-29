@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Lichen Map</title>
+      <link rel = "stylesheet" href = "http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css"/>
+      <link rel = "stylesheet" href = "styles.css"/>
+      <script src = "http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+      <link href="lightbox/dist/css/lightbox.css" rel="stylesheet" />
+      <script src="lightbox/dist/js/lightbox-plus-jquery.js"></script>
+      <script src="https://unpkg.com/leaflet@latest/dist/leaflet.js"></script>
+      <script src="https://unpkg.com/leaflet-providers@latest/leaflet-providers.js"></script>
+      <script src="https://unpkg.com/esri-leaflet@2.0.6"></script>
+      <script src="https://unpkg.com/esri-leaflet-vector@4.2.3/dist/esri-leaflet-vector.js" crossorigin=""></script>
+      <script src="img/Caloplaca_verruculifera_lichen_card_LR_010_24_08_24.jpg"></script>
+      <script src="img/Caloplaca_marina_lichen_card_LR_010_24_08_24.jpg"></script>
+      <script src="img/Xanthoria_parietina__lichen_card_LR_010_24_08_24.jpg"></script>
+      <script src="img/Myriolecis_actophila_helicopsis_lichen_card_LR_010_24_08_24.jpg"></script>
+      <script src="img/Ramalina_siliquosa _lichen_card_LR_010_24_08_24.jpg"></script>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+   </head>
+
+   <body>
+      <div id = "map" style = "width: 100%; height: 100vh"></div>
+      <script>
+         
+         
+
+         var map = L.map("map").setView([55.9839, -3.2195], 16);
+         L.esri.basemapLayer('Streets').addTo(map); 
+        
+
+         var mapOverlay = "img/lichenmapc.jpg",
+    imageBounds = [[55.987837, -3.224126], [55.979493, -3.214514]];
+L.imageOverlay(mapOverlay, imageBounds).addTo(map);
+
+var popup = L.popup();
+
+
+const createMarker = ( iconUrl, lat, long, lightBoxhref, imgRef, imgName ) => {
+   var icon = L.icon({
+    iconUrl,
+    iconSize:     [40, 40], // size of the icon
+    iconAnchor: [0,0],
+    keepInView: true
+    });
+var marker = L.marker([lat, long], {icon}).addTo(map);
+marker.bindPopup(`<a href='${lightBoxhref}' data-lightbox='image-1' data-title='${imgName}'> <img src='${imgRef}' width="250" height="360"></a>`)
+}
+
+createMarker(
+   'icons/sticker_01.png',
+   55.981874,
+   -3.218373,
+   'lightbox/dist/images/Caloplaca_verruculifera_lichen_card_LR_010_24_08_24.jpg',
+   'lightbox/dist/images/Caloplaca_verruculifera_lichen_card_LR_010_24_08_24.jpg',
+   'Caloplaca verruculifera'
+)
+
+createMarker (
+   'icons/sticker_02.png',
+   55.982831, 
+   -3.217879,
+   'lightbox/dist/images/Caloplaca_marina_lichen_card_LR_010_24_08_24.jpg',
+   'lightbox/dist/images/Caloplaca_marina_lichen_card_LR_010_24_08_24.jpg',
+   'Caloplaca marina'
+)
+
+createMarker (
+   'icons/sticker_03.png',
+   55.984013, 
+   -3.218017,
+   'lightbox/dist/images/Xanthoria_parietina__lichen_card_LR_010_24_08_24.jpg',
+   'lightbox/dist/images/Xanthoria_parietina__lichen_card_LR_010_24_08_24.jpg',
+   'Xanthoria parietina'
+)
+
+createMarker (
+   'icons/sticker_04.png',
+   55.985339, 
+   -3.217559,
+   'lightbox/dist/images/Myriolecis_actophila_helicopsis_lichen_card_LR_010_24_08_24.jpg',
+   'lightbox/dist/images/Myriolecis_actophila_helicopsis_lichen_card_LR_010_24_08_24.jpg',
+   'Myriolecis actophila helicopsis'
+)
+
+createMarker (
+   'icons/sticker_05.png',
+   55.987169,
+   -3.219630,
+   'lightbox/dist/images/Ramalina_siliquosa _lichen_card_LR_010_24_08_24.jpg',
+   'lightbox/dist/images/Ramalina_siliquosa _lichen_card_LR_010_24_08_24.jpg',
+   'Ramalina siliquousa'
+)
+
+
+var overlayMaps = {
+   "Handrawn": imageOverlay
+};
+var layerControl = L.control.layers (overlayMaps).addTo(map);
+
+
+//map.setMaxBounds(map.getBounds(), {
+  // padding:[100,100]
+//});
+
+//var mapBounds = L.latlngBounds([
+//[55.988180, -3.225095], [55.980714, -3.214023]
+//]);
+//map.fitBounds(mapBounds);
+
+
+
+      </script>
+   </body>
+   
+</html>
